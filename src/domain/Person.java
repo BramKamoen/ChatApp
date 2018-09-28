@@ -17,6 +17,7 @@ public class Person {
 	private String firstName;
 	private String lastName;
 	private Role role;
+	private String status;
 
 	public Person(String userId, String password, String firstName,
 			String lastName,Role role) {
@@ -38,6 +39,14 @@ public class Person {
 	}
 
 	public Person() {
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Role getRole() {

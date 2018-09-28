@@ -24,6 +24,21 @@
 </c:if> <c:choose>
 	<c:when test="${user!=null}">
 		<p>Welcome ${user.getFirstName()}!</p>
+
+		<div id="statusP"></div>
+		<input type="text" list="selectStatus" id="selectStatus2"/>
+		<datalist id="selectStatus">
+			<option>Online</option>
+			<option>Offline</option>
+			<option>afk</option>
+		</datalist>
+
+		<input type="button" id="buttonChange" value="Change Status"/>
+
+
+
+
+
 		<form method="post" action="Controller?action=LogOut">
 			<p>
 				<input type="submit" id="logoutbutton" value="Log Out">
@@ -50,5 +65,7 @@
 	<jsp:include page="footer.jsp">
 		<jsp:param name="title" value="Home" />
 	</jsp:include>
+
+<script type="text/javascript" src="js/ChangeStatus.js"></script>
 </body>
 </html>
