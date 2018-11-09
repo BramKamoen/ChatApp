@@ -26,6 +26,7 @@
 		<p>Welcome ${user.getFirstName()}!</p>
 
 		<div id="statusP"></div>
+
 		<input type="text" list="selectStatus" id="selectStatus2"/>
 		<datalist id="selectStatus">
 			<option>Online</option>
