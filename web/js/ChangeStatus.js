@@ -1,6 +1,6 @@
 var statusRequest = new XMLHttpRequest();
 window.onload = function(){
-    statusRequest.open("GET", "Controller?action=getStatus", true);
+    statusRequest.open("GET", "Controller?action=GetStatus", true);
     statusRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     statusRequest.onreadystatechange = getData;
     statusRequest.send(null);

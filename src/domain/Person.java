@@ -18,24 +18,30 @@ public class Person {
 	private String lastName;
 	private Role role;
 	private String status;
+	private String email;
+	private int leeftijd;
 
 	public Person(String userId, String password, String firstName,
-			String lastName,Role role) {
+			String lastName,Role role, String email, int leeftijd) {
 		setUserId(userId);
 		setHashedPassword(password);
 		setFirstName(firstName);
 		setLastName(lastName);
 		setRole(role);
+		setEmail(email);
+		setLeeftijd(leeftijd);
 	}
 
 	public Person(String userId, String password, String salt,
-			String firstName, String lastName,Role role) {
+			String firstName, String lastName,Role role, String email, int leeftijd) {
 		setUserId(userId);
 		setPassword(password);
 		setSalt(salt);
 		setFirstName(firstName);
 		setLastName(lastName);
 		setRole(role);
+		setEmail(email);
+		setLeeftijd(leeftijd);
 	}
 
 	public Person() {
@@ -43,6 +49,22 @@ public class Person {
 
 	public String getStatus() {
 		return status;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public int getLeeftijd() {
+		return leeftijd;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setLeeftijd(int leeftijd) {
+		this.leeftijd = leeftijd;
 	}
 
 	public void setStatus(String status) {
