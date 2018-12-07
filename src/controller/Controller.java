@@ -36,23 +36,30 @@ public class Controller extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String destination = "index.jsp";
-        if (action != null) {
-        	RequestHandler handler;
-        	try {
-        		handler = controllerFactory.getController(action, model);
+		String action = request.getParameter("action");
+		String destination = "index.jsp";
+		if (action != null) {
+			RequestHandler handler = null;
+			try {
+				handler = controllerFactory.getController(action, model);
 				destination = handler.handleRequest(request, response);
-        	} 
-        	catch (NotAuthorizedException exc) {
-        		List<String> errors = new ArrayList<String>();
-        		errors.add(exc.getMessage());
-        		request.setAttribute("errors", errors);
-        		destination="index.jsp";
-        	}
-        }
-        RequestDispatcher view = request.getRequestDispatcher(destination);
-        view.forward(request, response);
+			} catch (NotAuthorizedException exc) {
+				List<String> errors = new ArrayList<String>();
+				errors.add(exc.getMessage());
+				request.setAttribute("errors", errors);
+				destination = "index.jsp";
+			}
+			if (handler instanceof SynHandler) {
+				RequestDispatcher view = request.getRequestDispatcher(destination);
+				view.forward(request, response);
+			} else if (handler instanceof AsynHandler) {
+				response.getWriter().write(destination);
+
+			}
+		} else {
+			RequestDispatcher view = request.getRequestDispatcher(destination);
+			view.forward(request, response);
+		}
 	}
 
 }

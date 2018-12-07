@@ -1,10 +1,13 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,17 +15,23 @@ import java.util.regex.Pattern;
 public class Person {
 
 	private String userId;
+	@JsonIgnore
 	private String password;
+	@JsonIgnore
 	private String salt;
 	private String firstName;
 	private String lastName;
 	private Role role;
 	private String status;
+	private String geslacht;
 	private String email;
 	private int leeftijd;
+	@JsonIgnore
+	private List<Person> vrienden;
+
 
 	public Person(String userId, String password, String firstName,
-			String lastName,Role role, String email, int leeftijd) {
+			String lastName,Role role, String email, int leeftijd, String geslacht) {
 		setUserId(userId);
 		setHashedPassword(password);
 		setFirstName(firstName);
@@ -30,10 +39,12 @@ public class Person {
 		setRole(role);
 		setEmail(email);
 		setLeeftijd(leeftijd);
+		vrienden = new ArrayList<Person>();
+		setGeslacht(geslacht);
 	}
 
 	public Person(String userId, String password, String salt,
-			String firstName, String lastName,Role role, String email, int leeftijd) {
+			String firstName, String lastName,Role role, String email, int leeftijd, String geslacht) {
 		setUserId(userId);
 		setPassword(password);
 		setSalt(salt);
@@ -42,6 +53,8 @@ public class Person {
 		setRole(role);
 		setEmail(email);
 		setLeeftijd(leeftijd);
+		vrienden = new ArrayList<>();
+		setGeslacht(geslacht);
 	}
 
 	public Person() {
@@ -50,6 +63,11 @@ public class Person {
 	public String getStatus() {
 		return status;
 	}
+
+	public void setGeslacht(String geslacht){
+		this.geslacht = geslacht;
+	}
+	public String getGeslacht(){return geslacht;}
 
 	public String getEmail() {
 		return email;
@@ -98,10 +116,12 @@ public class Person {
 		return userId;
 	}
 
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
 
+	@JsonIgnore
 	public boolean isCorrectPassword(String password) {
 		if (password.isEmpty()) {
 			throw new IllegalArgumentException("No password given");
@@ -109,6 +129,7 @@ public class Person {
 		return getPassword().equals(hashPassword(password, getSalt()));
 	}
 
+	@JsonIgnore
 	public void setPassword(String password) {
 		if (password.isEmpty()) {
 			throw new IllegalArgumentException("No password given");
@@ -116,6 +137,7 @@ public class Person {
 		this.password = password;
 	}
 
+	@JsonIgnore
 	public void setHashedPassword(String password) {
 		if (password.isEmpty()) {
 			throw new IllegalArgumentException("No password given");
@@ -123,6 +145,7 @@ public class Person {
 		this.password = hashPassword(password);
 	}
 
+	@JsonIgnore
 	private String hashPassword(String password) {
 		SecureRandom random = new SecureRandom();
 		byte[] seed = random.generateSeed(20);
@@ -133,6 +156,7 @@ public class Person {
 		return hashPassword(password, salt);
 	}
 
+	@JsonIgnore
 	private String hashPassword(String password, String seed) {
 		String hashedPassword = null;
 		try {
@@ -149,10 +173,12 @@ public class Person {
 		return hashedPassword;
 	}
 
+	@JsonIgnore
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
 
+	@JsonIgnore
 	public String getSalt() {
 		return salt;
 	}
@@ -178,6 +204,23 @@ public class Person {
 			throw new IllegalArgumentException("No last name given");
 		}
 		this.lastName = lastName;
+	}
+
+	public void addVriend(Person p){
+		vrienden.add(p);
+	}
+
+	public void deleteVriend(Person p){
+		for (Person x : vrienden) {
+			if (p.getUserId().equals(x.getUserId())) {
+				vrienden.remove(x);
+			}
+		}
+	}
+
+	@JsonIgnore
+	public List<Person> getVrienden(){
+		return this.vrienden;
 	}
 
 }

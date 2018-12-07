@@ -28,7 +28,7 @@ public class AddPerson extends SynHandler {
             role = Role.LID;
         }
 
-        Person p = new Person(request.getParameter("firstName") + "@ucll.be", request.getParameter("password"), request.getParameter("firstName"), request.getParameter("lastName"), role, request.getParameter("mail"), Integer.parseInt(request.getParameter("leeftijd")));
+        Person p = new Person(request.getParameter("voornaam") + "@ucll.be", request.getParameter("password"), request.getParameter("voornaam"), request.getParameter("naam"), role, request.getParameter("mail"), Integer.parseInt(request.getParameter("leeftijd")), request.getParameter("geslacht"));
 
 
         try{

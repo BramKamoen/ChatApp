@@ -1,5 +1,6 @@
 package controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import domain.Person;
 import domain.PersonService;
 import domain.Role;
@@ -8,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public abstract class AsynHandler extends RequestHandler {
-    private PersonService personService;
+    private PersonService personService = super.getPersonService();
 
     @Override
-    public  abstract String handleRequest(HttpServletRequest request, HttpServletResponse response);
+    public abstract String handleRequest(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException;
 
     public void setModel (PersonService personService) {
         this.personService = personService;

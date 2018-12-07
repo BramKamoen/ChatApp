@@ -16,8 +16,6 @@ public class StatusServlet extends AsynHandler{
         HttpSession session = request.getSession();
         Person person = (Person) session.getAttribute("user");
         String status = (String) request.getParameter("status");
-        System.out.println(status);
-        System.out.println(person);
         person.setStatus(status);
         service.updatePersons(person);
         return status;
