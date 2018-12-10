@@ -13,6 +13,7 @@ var messages;
 
         }
         else {
+            alert(nummer);
             var nummer = JSON.parse(event.data).number;
             var text = JSON.parse(event.data).text;
             var rating = JSON.parse(event.data).rating;

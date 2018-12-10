@@ -190,5 +190,6 @@
 <script type="text/javascript" src="js/ChangeStatus.js"></script>
 <script type="text/javascript" src="js/AddFriend.js"></script>
 	<script src="js/blog.js"></script>
+<script tpye="text/javascript" src="js/MessageApp.js"></script>
 </body>
 </html>

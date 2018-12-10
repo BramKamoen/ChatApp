@@ -36,7 +36,7 @@ function updateTable(Json){
 
     }
     Json.forEach(function(value){
-            vriendDiv.insertAdjacentHTML("beforeend", "<form><p class = 'Vriend'>" + value.firstName + " " + value.lastName + " " + value.status + "</p>" + "<button type='button' value='Chat' onclick=\"StuurBericht(\'"+ value.userId + "\');\">Chat</button>")
+            vriendDiv.insertAdjacentHTML("beforeend", "<form><p class = 'Vriend'>" + value.firstName + " " + value.lastName + " " + value.status + "</p>")
         }
     )
 

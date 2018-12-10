@@ -28,6 +28,8 @@ public class Person {
 	private int leeftijd;
 	@JsonIgnore
 	private List<Person> vrienden;
+	//@JsonIgnore
+	//private List<History> histories = new ArrayList<History>();
 
 
 	public Person(String userId, String password, String firstName,
@@ -41,6 +43,7 @@ public class Person {
 		setLeeftijd(leeftijd);
 		vrienden = new ArrayList<Person>();
 		setGeslacht(geslacht);
+		//this.setHistory(histories);
 	}
 
 	public Person(String userId, String password, String salt,
@@ -55,6 +58,7 @@ public class Person {
 		setLeeftijd(leeftijd);
 		vrienden = new ArrayList<>();
 		setGeslacht(geslacht);
+		//this.setHistory(histories);
 	}
 
 	public Person() {
@@ -218,9 +222,24 @@ public class Person {
 		}
 	}
 
+
 	@JsonIgnore
 	public List<Person> getVrienden(){
 		return this.vrienden;
 	}
+
+	/*
+	@JsonIgnore
+	public List<History> getHistory() {
+		return histories;
+	}
+
+	@JsonIgnore
+	public void setHistory(List<History> history) {
+		this.histories = history;
+	}
+	*/
+
+
 
 }
